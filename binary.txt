@@ -1,0 +1,47 @@
+import java.util.Scanner;
+
+public class time_BS {
+    static void search(int a[], int key) {
+        int n = a.length;
+        int start = 0, end = n - 1, mid;
+        long startTime = System.nanoTime();
+        
+        while (start <= end) {
+            mid = (start + end) / 2;
+            if (a[mid] == key) {
+                long endTime = System.nanoTime();
+                long totalTime = endTime - startTime;
+                System.out.println("Total time taken = " + totalTime + " ns\nElement found at index: " + mid);
+                return;
+            } else if (a[mid] > key) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+        
+        long endTime = System.nanoTime();
+        long totalTime = endTime - startTime;
+        System.out.println("Total time taken = " + totalTime + " ns\nElement not found.");
+    }
+
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int n;
+        
+        System.out.println("Enter the size of the array:");
+        n = sc.nextInt();
+        int a[] = new int[n];
+        
+        System.out.println("Enter the elements in sorted ascending order:");
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        
+        int key;
+        System.out.println("Enter the search element:");
+        key = sc.nextInt();
+        
+        search(a, key);
+    }
+}
